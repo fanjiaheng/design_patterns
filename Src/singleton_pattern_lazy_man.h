@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-// 懒汉式单例模式：在类加载时不初始化、按照需求创建实例、以时间换取空间模式
+// 懒汉式单例模式：在类加载时不初始化、按照需求创建实例
 
 namespace FjhApp {
 class CSingletonPatternLazyMan
