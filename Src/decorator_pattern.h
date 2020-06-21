@@ -30,8 +30,9 @@ public:
         std::cout << "装饰品的抽象基类构造函数" << std::endl;
 	}
 
-	void lookIntoTheMirror()
+	void lookIntoTheMirror() // 反复的包装这里
 	{
+        std::cout << "222222222222" << std::endl;
 		m_women->lookIntoTheMirror();
 		makeUp();
 	}
