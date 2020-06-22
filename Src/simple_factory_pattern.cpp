@@ -1,0 +1,1 @@
+#include "simple_factory_pattern.h"
