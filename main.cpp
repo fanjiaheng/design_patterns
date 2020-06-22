@@ -1,26 +1,26 @@
 #include <iostream>
-#include "src/strategy_pattern.h"
+#include "src/memento_pattern.h"
 
 using namespace std;
-
 
 int main(int argc, char **argv)
 {
     std::cout << "设计模式测试用例" << std::endl;
-    /*
-    Strategy模式和Template模式实际是实现一个抽象接口的两种方式：继承和组合之间的区别。
-    要实现一个抽象接口，继承是一种方式：我们将抽象接口声明在基类中，将具体的实现放在具体子类中。
-    组合（委托）是另外一种方式：我们将接口的实现放在被组合对象中，将抽象接口放在组合类中。
-    这两种方式各有优缺点
-    */
-    //策略A与B可替换
-    FjhApp::Strategy* pStr = new FjhApp::ConcreteStrategyA();
-    FjhApp::Context* pcon = new FjhApp::Context(pStr);
-    pcon->DoAction();
 
-    pStr = new FjhApp::ConcreteStrategyB();
-    pcon = new FjhApp::Context(pStr);
-    pcon->DoAction();
+    FjhApp::GameRole *pLiXY = new FjhApp::GameRole(); // 创建李逍遥这个角色
+    pLiXY->ShowState();               // 显示初始的状态
+
+    // 存档
+    FjhApp::RoleStateCaretaker *pRoleStateCaretaker = new FjhApp::RoleStateCaretaker();
+    pRoleStateCaretaker->SetRoleStateMemento(pLiXY->SaveState());
+
+    // 开始打大BOSS
+    pLiXY->Fight();
+    pLiXY->ShowState();
+
+    // 读档，从新开始
+    pLiXY->RecoveryState(pRoleStateCaretaker->GetRoleStateMemento());
+    pLiXY->ShowState();
 
     return 0;
 }
