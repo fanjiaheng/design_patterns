@@ -1,28 +1,32 @@
 #include <iostream>
-#include "Src/abstract_factory_pattern.h"
+#include "Src/abstract_template_factory.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
     std::cout << "设计模式测试用例" << std::endl;
-    // ================ 生产耐克流程 ==================== //
-    // 鞋厂开设耐克生产线
-    FjhApp::Factory *niKeProducer = new FjhApp::NiKeProducer();
     
-	// 耐克生产线产出球鞋
-    FjhApp::Shoes *nikeShoes = niKeProducer->CreateShoes();
-	// 耐克生产线产出衣服
-    FjhApp::Clothe *nikeClothe = niKeProducer->CreateClothe();
-    
-	// 耐克球鞋广告喊起
-    nikeShoes->Show();
-	// 耐克衣服广告喊起
-    nikeClothe->Show();
-	
+    // 构造耐克鞋的工厂对象
+    FjhApp::ConcreteFactory<FjhApp::Shoes, FjhApp::NiKeShoes> nikeFactory;
+    // 创建耐克鞋对象
+    FjhApp::Shoes *pNiKeShoes = nikeFactory.CreateProduct();
+    // 打印耐克鞋广告语
+    pNiKeShoes->Show();
+
+    // 构造优衣库衣服的工厂对象
+    FjhApp::ConcreteFactory<FjhApp::Clothe, FjhApp::UniqloClothe> uniqloFactory;
+    // 创建优衣库衣服对象
+    FjhApp::Clothe *pUniqloClothe = uniqloFactory.CreateProduct();
+    // 打印优衣库广告语
+    pUniqloClothe->Show();
+
     // 释放资源
-    delete nikeShoes;
-	delete nikeClothe;
-    delete niKeProducer;
+    delete pNiKeShoes;
+    pNiKeShoes = NULL;
+
+    delete pUniqloClothe;
+    pUniqloClothe = NULL;
+
     return 0;
 }
