@@ -1,50 +1,33 @@
 #include <iostream>
-#include "Src/simple_factory_pattern.h"
+#include "Src/factory_pattern.h"
 
 using namespace std;
 
 int main(int argc, char **argv)
 {
     std::cout << "设计模式测试用例" << std::endl;
-    
-    // 构造工厂对象
-    FjhApp::ShoesFactory shoesFactory;
 
-    // 从鞋工厂对象创建阿迪达斯鞋对象
-    FjhApp::Shoes *pNikeShoes = shoesFactory.CreateShoes(FjhApp::NIKE);
-    if (pNikeShoes != NULL)
-    {
-        // 耐克球鞋广告喊起
-        pNikeShoes->Show();
+    // ================ 生产耐克流程 ==================== //
+    // 鞋厂开设耐克生产线
+    FjhApp::ShoesFactory *niKeProducer = new FjhApp::NiKeProducer();
+    // 耐克生产线产出球鞋
+    FjhApp::Shoes *nikeShoes = niKeProducer->CreateShoes();
+    // 耐克球鞋广告喊起
+    nikeShoes->Show();
+    // 释放资源
+    delete nikeShoes;
+    delete niKeProducer;
 
-        // 释放资源
-        delete pNikeShoes;
-        pNikeShoes = NULL;
-    }
-
-    // 从鞋工厂对象创建阿迪达斯鞋对象
-    FjhApp::Shoes *pLiNingShoes = shoesFactory.CreateShoes(FjhApp::LINING);
-    if (pLiNingShoes != NULL)
-    {
-        // 李宁球鞋广告喊起
-        pLiNingShoes->Show();
-
-        // 释放资源
-        delete pLiNingShoes;
-        pLiNingShoes = NULL;
-    }
-
-    // 从鞋工厂对象创建阿迪达斯鞋对象
-    FjhApp::Shoes *pAdidasShoes = shoesFactory.CreateShoes(FjhApp::ADIDAS);
-    if (pAdidasShoes != NULL)
-    {
-        // 阿迪达斯球鞋广告喊起
-        pAdidasShoes->Show();
-
-        // 释放资源
-        delete pAdidasShoes;
-        pAdidasShoes = NULL;
-    }
+    // ================ 生产阿迪达斯流程 ==================== //
+    // 鞋厂开设阿迪达斯生产者
+    FjhApp::ShoesFactory *adidasProducer = new FjhApp::AdidasProducer();
+    // 阿迪达斯生产线产出球鞋
+    FjhApp::Shoes *adidasShoes = adidasProducer->CreateShoes();
+    // 阿迪达斯球鞋广喊起
+    adidasShoes->Show();
+    // 释放资源
+    delete adidasShoes;
+    delete adidasProducer;
 
     return 0;
 }
